@@ -1,0 +1,7 @@
+development:
+  adapter: postgresql
+  database: bonilla_bucks_development
+
+test:
+  adapter: postgresql
+  database: bonilla_bucks_test
