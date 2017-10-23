@@ -8,7 +8,7 @@ require('pry')
 helpers do
   def current_user
     if session[:user_id]
-      Player.find { |u| u.id == session[:user_id] }
+      Student.find { |u| u.id == session[:user_id] }
     else
       nil
     end
@@ -20,8 +20,8 @@ get('/') do
 end
 
 post('/login') do
-  user = Students.find { |u| u.user_name == params["user_name"] }
-  if user && user.auth_pass(params["user_password"], user.user_password)
+  user = Student.find { |u| u.name == params["user_name"] }
+  if user && user.auth_pass(params["user_password"], user.password)
     session.clear
     session[:user_id] = user.id
     redirect("/")
@@ -32,11 +32,15 @@ post('/login') do
 end
 
 get('/register') do
+  erb(:register)
+end
+
+post('/register') do
   name = params['name']
   user_name = params['user_name']
   user_password = params['user_password']
-  Students.create({name: name, user_name: user_name, user_password: user_password})
-  erb(:login)
+  Student.create({name: name, username: user_name, password: user_password})
+  redirect('/')
 end
 
 get('/signout') do
