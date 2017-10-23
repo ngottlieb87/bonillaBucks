@@ -13,6 +13,6 @@ class Student < ActiveRecord::Base
   private
 
   def hash_pass()
-    self.user_password=(BCrypt::Password.create(user_password).to_s)
+    self.password=(BCrypt::Password.create(password).to_s)
   end
 end
