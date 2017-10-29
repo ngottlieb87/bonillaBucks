@@ -20,13 +20,13 @@ get('/') do
 end
 
 post('/login') do
-  user = Student.find { |u| u.name == params["user_name"] }
+  user = Student.find { |u| u.username == params["user_name"] }
   if user && user.auth_pass(params["user_password"], user.password)
     session.clear
     session[:user_id] = user.id
     redirect("/")
   else
-    @error = 'Username or password was incorrect.'
+    @error = 'User name or password was incorrect.'
     erb(:error)
   end
 end
