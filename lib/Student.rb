@@ -2,7 +2,7 @@ class Student < ActiveRecord::Base
   has_many :accounts
   has_many :rewards, through: :accounts
   has_many :fines, through: :accounts
-  validates(:username, {:presence=> true, :length=>{:maximum=>30}})
+  validates(:user_name, {:presence=> true, :length=>{:maximum=>30}})
   before_save(:hash_pass)
   include BCrypt
 
